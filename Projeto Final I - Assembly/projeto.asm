@@ -1,7 +1,8 @@
-;UFPB - CENTRO DE INFORM¡TICA
-;CI NCIA DA COMPUTA«√O - ARQUITETURA DE COMPUTADORES I
-;ALUNO: LEONARDO DO NASCIMENTO PEIXOTO DA SILVA MATRÕCULA: 20200005766
-;PROJETO 1: PROGRAMA EM ASSEMBLY PARA CALCULAR E EXIBIR M…DIAS DE ALUNOS (40)
+;UFPB - CENTRO DE INFORM√ÅTICA
+;CI√äNCIA DA COMPUTA√á√ÉO - ARQUITETURA DE COMPUTADORES I
+;ALUNO: LEONARDO DO NASCIMENTO PEIXOTO DA SILVA MATR√çCULA: 20200005766
+;PROJETO 1: PROGRAMA EM ASSEMBLY PARA CALCULAR E EXIBIR M√âDIAS DE ALUNOS (40)
+;OBSERVA√á√ÉO - Projeto incompleto: N√£o foi realizado uma fun√ß√£o separada para calcular as m√©dias e s√≥ pode calcular e exibir a m√©dia de um aluno por vez ao inv√©s de 40
 
 .686
 .model flat, stdcall
@@ -16,38 +17,38 @@ includelib \masm32\lib\user32.lib
 includelib \masm32\lib\masm32.lib
 
 .data
-; PreparaÁıes genÈricas
+; Prepara√ß√µes gen√©ricas
 outputHandle dd 0 ;Variavel para armazenar o handle de saida
 inputHandle dd 0 
 outputLinhaTraco db "---------------------------------------------", 0ah, 0h
 pula_linha db "  ", 0ah, 0h
 
-; PreparaÁ„o para exibir Menu
+; Prepara√ß√£o para exibir Menu
 outputInicioMenu db "--------- Programa - Exibindo notas ---------", 0ah, 0h
 linha1 db "1. Incluir notas de aluno (max. 40 alunos)", 0ah, 0h
 linha2 db "2. Exibir medias da turma", 0ah, 0h
 linha3 db "3. Sair do programa", 0ah, 0h
 
-; PreparaÁ„o para pegar a opÁ„o do usu·rio via string
+; Prepara√ß√£o para pegar a op√ß√£o do usu√°rio via string
 write_count dd 0 ;Variavel para armazenar caracteres escritos na console
 inputString db 50 dup(0)
 console_count dd 0
 tamanho_string dd 0
 
-; PreparaÁ„o para o que deve ser exibido na opÁ„o 1
+; Prepara√ß√£o para o que deve ser exibido na op√ß√£o 1
 opcao1_nome db "Digite o nome do aluno: ", 0ah, 0h
 opcao1_nota1 db "Digite a nota 1 do aluno: ", 0ah, 0h
 opcao1_nota2 db "Agora a nota 2 do aluno: ", 0ah, 0h
 opcao1_nota3 db "Por ultimo, a nota 3 do aluno: ", 0ah, 0h
 
-; PreparaÁ„o para o que deve ser exibido na opÁ„o 2
+; Prepara√ß√£o para o que deve ser exibido na op√ß√£o 2
 opcao2_linha1 db "Nome do aluno: ", 0ah, 0h
 opcao2_linha2 db "Nota 1: ", 0ah, 0h
 opcao2_linha3 db "Nota 2: ", 0ah, 0h
 opcao2_linha4 db "Nota 3: ", 0ah, 0h
 opcao2_linha5 db "A media do aluno foi: ", 0ah, 0h
 
-; PreparaÁ„o para dados dos alunos
+; Prepara√ß√£o para dados dos alunos
 nomes_alunos db 15 dup(0) 
 notas_1 real4 40 dup(0.0)
 notas_2 real4 40 dup(0.0)
@@ -77,13 +78,13 @@ invoke WriteConsole, outputHandle, addr outputLinhaTraco, sizeof outputLinhaTrac
 invoke GetStdHandle, STD_INPUT_HANDLE
 mov inputHandle, eax
 
-; Pegando a escolha do usu·rio
+; Pegando a escolha do usu√°rio
 invoke ReadConsole, inputHandle, addr inputString, sizeof inputString, addr console_count, NULL
 ;invoke StrLen, addr inputString
 ;mov tamanho_string, eax
 ;invoke WriteConsole, outputHandle, addr inputString, tamanho_string, addr console_count, NULL
 
-; Linhas de cÛdigo para ajeitar o atodw
+; Linhas de c√≥digo para ajeitar o atodw
 mov esi, offset inputString; Armazenar apontador da string em esi
 proximo:
 mov al, [esi] ; Mover caracter atual para al
@@ -97,10 +98,10 @@ dec esi ; Apontar para caracter anterior
 xor al, al ; 0 ou NULL
 mov [esi], al ; Inserir NULL logo apos o termino do numero
 
-; Atodw para transformar meu inputString em n˙mero
+; Atodw para transformar meu inputString em n√∫mero
 invoke atodw, addr inputString
 
-; OpÁıes escolhidas pelo usu·rio
+; Op√ß√µes escolhidas pelo usu√°rio
 cmp eax, 1
 je opcao1
 cmp eax, 2
@@ -108,10 +109,10 @@ je opcao2
 cmp eax, 3
 je opcao3
 
-; Jump para o usuario digitar qualquer coisa alÈm de 1, 2 ou 3
+; Jump para o usuario digitar qualquer coisa al√©m de 1, 2 ou 3
 jmp start
 
-; OpÁ„o 1 - Coletar as notas do aluno (m·ximo de alunos: 40)
+; Op√ß√£o 1 - Coletar as notas do aluno (m√°ximo de alunos: 40)
 opcao1:
 
 invoke WriteConsole, outputHandle, addr outputLinhaTraco, sizeof outputLinhaTraco-1, addr write_count, NULL
@@ -157,11 +158,11 @@ fstp REAL4 PTR[notas_3+0]
 ; FIM TERCEIRA NOTA
 
 invoke WriteConsole, outputHandle, addr outputLinhaTraco, sizeof outputLinhaTraco-1, addr write_count, NULL
-jmp start ; Acabou o que fazer na opÁ„o 1, agora volta para o inicio
-; FIM OP«√O 1
+jmp start ; Acabou o que fazer na op√ß√£o 1, agora volta para o inicio
+; FIM OP√á√ÉO 1
 
 
-; OpÁ„o 2 - Exibir o nome, as notas e mÈdia do aluno (m·ximo de alunos: 40)
+; Op√ß√£o 2 - Exibir o nome, as notas e m√©dia do aluno (m√°ximo de alunos: 40)
 opcao2:
 invoke WriteConsole, outputHandle, addr outputLinhaTraco, sizeof outputLinhaTraco-1, addr write_count, NULL
 
@@ -201,10 +202,10 @@ invoke WriteConsole, outputHandle, addr num_em_string, tamanho, addr write_count
 invoke WriteConsole, outputHandle, addr pula_linha, sizeof pula_linha-1, addr write_count, NULL 
 invoke WriteConsole, outputHandle, addr pula_linha, sizeof pula_linha-1, addr write_count, NULL 
 
-; Informando mÈdia
+; Informando m√©dia
 invoke WriteConsole, outputHandle, addr opcao2_linha5, sizeof opcao2_linha5-1, addr write_count, NULL
 
-; Calculo da mÈdia
+; Calculo da m√©dia
 movups xmm0, OWORD PTR[notas_1]
 movups xmm1, OWORD PTR[notas_2]
 addps xmm0,xmm1
@@ -214,16 +215,16 @@ movups xmm1, OWORD PTR[constante_3]
 divps xmm0, xmm1
 movups OWORD PTR[medias], xmm0
 
-; Conversao para exibiÁ„o da mÈdia I
+; Conversao para exibi√ß√£o da m√©dia I
 fld REAL4 PTR[medias+0]
 fstp REAL8 PTR[nota_temp]
 
-; Conversao para exibiÁ„o da mÈdia II
+; Conversao para exibi√ß√£o da m√©dia II
 invoke FloatToStr, REAL8 PTR [nota_temp], offset num_em_string
 invoke StrLen, offset num_em_string
 mov tamanho, eax
 
-; Exibindo a mÈdia
+; Exibindo a m√©dia
 invoke WriteConsole, outputHandle, addr num_em_string, tamanho, addr write_count, NULL
 
 invoke WriteConsole, outputHandle, addr pula_linha, sizeof pula_linha-1, addr write_count, NULL 
