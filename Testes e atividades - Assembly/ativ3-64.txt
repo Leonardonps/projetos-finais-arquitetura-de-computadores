@@ -1,0 +1,35 @@
+exerc3-64
+
+global main
+extern printf
+
+section .data
+   constante1 dq 50
+   constante2 dq 60
+   texto_saidadb "O maior valor eh:%d", 0AH, 0H
+
+section .text
+main:
+; if(constante1 > constante2) printf("O maior valor eh: %d\n, constante1);
+; 	else printf("O maior valor eh: %d\n", constante2);
+
+push rbp ; Inserir 8 bytes na pilha para garantir que RSP eh multiplo de 16
+mov rax, [constante1]
+cmp rax, [constante2]
+
+jg um_eh_maior
+mov rdi, texto_saida
+mov rsi, [constante2]
+call printf
+jmp fim_programa
+
+um_eh_maior:
+	mov rdi, texto_saida
+mov rsi, [constante1]
+call printf
+
+pop rbp ; Desfazer o push RBP realizado no inicio do programa
+fim_programa:
+	mov rax, 60
+xor, rbx, rbi
+syscall

@@ -1,0 +1,29 @@
+NASCM - ATIVIDADE 2
+
+extern printf
+global main
+
+section .bss
+   var_a: resd 1
+
+section .data
+  texto_saida db "O valor de a eh %d", 0AH, 0H
+  var_b dd 30
+  var_c dd 50
+
+section .text
+main:
+; a = b + c + 100
+; printf("O valor de a eh %d\n", a)
+
+mov eax, [var_b]
+add eax, [var_c]
+add eax, 100
+mov [var_a], eax
+push DWORD[var_a]
+push texto_saida
+call printf
+add esp, 8 
+mov eax, 1
+xor ebx, ebx
+int 80h
