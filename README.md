@@ -8,10 +8,10 @@ O primeiro projeto final tinha como objetivo desenvolver um programa simples de 
 
 ### Objetivos:
 
-- Alocar memória para as 3 notas de cada aluno
-- Calcular média de 40 alunos
-- Realizar média em uma função separada que recebe como parâmetros as notas de cada aluno
-- Exibir a médias dos 40 alunos
+- Alocar memória para as 3 notas de cada aluno;
+- Calcular média de 40 alunos;
+- Realizar média em uma função separada que recebe como parâmetros as notas de cada aluno;
+- Exibir a médias dos 40 alunos.
 
 ### O que consegui fazer:
 
